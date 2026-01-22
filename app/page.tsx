@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   Gamepad2,
   Glasses,
@@ -11,29 +11,30 @@ import {
   Phone,
   ChevronDown,
   ExternalLink,
-  Github,
   Linkedin,
   Sun,
   Moon
 } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export default function Home() {
-  const { scrollYProgress } = useScroll();
-  const [activeSection, setActiveSection] = useState('home');
+
+  const [, setActiveSection] = useState('home');
   const [theme, setTheme] = useState('dark');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    // setMounted and setTheme asynchronously to avoid synchronous setState inside an effect
     const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
-    if (savedTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    setTimeout(() => {
+      setMounted(true);
+      setTheme(savedTheme);
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }, 0);
   }, []);
 
   const toggleTheme = () => {
@@ -58,7 +59,7 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-indigo-500/30 overflow-x-hidden transition-colors duration-300">
+    <main className="min-h-screen bg-(--background) text-(--foreground) selection:bg-indigo-500/30 overflow-x-hidden transition-colors duration-300">
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b transition-colors duration-300 ${theme === 'dark' ? 'bg-black/50 border-white/5' : 'bg-white/70 border-neutral-200'}`}>
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -115,11 +116,11 @@ export default function Home() {
       <section id="home" className="relative h-screen flex items-center justify-center pt-16 overflow-hidden">
         {/* Gradients */}
         <div
-          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 via-black to-black transition-opacity duration-500"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-indigo-900/20 via-black to-black transition-opacity duration-500"
           style={{ opacity: theme === 'dark' ? 0.5 : 0 }}
         />
         <div
-          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-100 via-transparent to-transparent transition-opacity duration-500"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-indigo-100 via-transparent to-transparent transition-opacity duration-500"
           style={{ opacity: theme === 'dark' ? 0 : 1 }}
         />
 
@@ -137,7 +138,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className={`text-5xl md:text-8xl font-bold tracking-tight mb-6 transition-colors ${theme === 'dark' ? 'text-transparent bg-clip-text bg-gradient-to-b from-white to-neutral-500' : 'text-neutral-900'}`}
+            className={`text-5xl md:text-8xl font-bold tracking-tight mb-6 transition-colors ${theme === 'dark' ? 'text-transparent bg-clip-text bg-linear-to-b from-white to-neutral-500' : 'text-neutral-900'}`}
           >
             Perumal Pothan
           </motion.h1>
@@ -184,7 +185,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 md:py-32 relative border-t border-[var(--card-border)] transition-colors">
+      <section id="about" className="py-24 md:py-32 relative border-t border-(--card-border) transition-colors">
         <div className="max-w-7xl mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -197,10 +198,7 @@ export default function Home() {
               About Me
             </h2>
             <p className={`text-lg leading-relaxed mb-6 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>
-              Hello! I'm Perumal, a dedicated developer specializing in creating engaging games and augmented/virtual reality applications. With a strong foundation in C# and extensive experience in 3D content creation using tools like Maya, I bring ideas from concept to reality.
-            </p>
-            <p className={`text-lg leading-relaxed ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>
-              My journey is driven by a fascination for how technology can create new forms of art and interaction. Whether it's developing game mechanics, modeling complex 3D assets, or building immersive AR worlds, I am committed to delivering high-quality, polished experiences.
+              I am a Game Developer specializing in Unity and Virtual Reality development, with a strong foundation in C# programming and game development fundamentals. As a final-year Game Design and Development student, I have experience building interactive 2D, 3D, and VR applications, focusing on clean architecture, scalable systems, and optimized performance. I am passionate about creating immersive gameplay experiences and continuously improving my technical and creative skills to contribute to innovative game projects.
             </p>
           </motion.div>
 
@@ -211,21 +209,15 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            <div className={`aspect-square rounded-3xl overflow-hidden bg-[var(--card-bg)] border border-[var(--card-border)] relative group transition-colors ${theme === 'dark' ? 'shadow-none' : 'shadow-2xl'}`}>
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:scale-110 transition-transform duration-700" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className={`text-center p-8 backdrop-blur-md rounded-2xl border border-[var(--card-border)] ${theme === 'dark' ? 'bg-black/40 shadow-none' : 'bg-white/80 shadow-lg'}`}>
-                  <Code2 className={`w-12 h-12 mx-auto mb-4 ${theme === 'dark' ? 'text-indigo-400' : 'text-indigo-500'}`} />
-                  <p className={`font-mono text-sm ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'}`}>Turning Code into Reality</p>
-                </div>
-              </div>
+            <div className={`aspect-square rounded-3xl overflow-hidden bg-(--card-bg) border border-(--card-border) relative group transition-colors ${theme === 'dark' ? 'shadow-none' : 'shadow-2xl'}`}>
+              <div className="absolute inset-0 bg-[url('/pothan-photo.jpeg')] bg-cover bg-center group-hover:scale-110 transition-transform duration-700" role="img" aria-label="Perumal Pothan" />
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-24 border-t border-[var(--card-border)] bg-[var(--secondary-bg)] transition-colors">
+      <section id="skills" className="py-24 border-t border-(--card-border) bg-(--secondary-bg) transition-colors">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -269,7 +261,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className={`p-8 rounded-2xl border bg-[var(--card-bg)] border-[var(--card-border)] transition-all group ${theme === 'dark' ? 'hover:border-white/10 hover:bg-white/10' : 'hover:border-indigo-500/50 hover:shadow-lg'}`}
+                className={`p-8 rounded-2xl border bg-(--card-bg) border-(--card-border) transition-all group ${theme === 'dark' ? 'hover:border-white/10 hover:bg-white/10' : 'hover:border-indigo-500/50 hover:shadow-lg'}`}
               >
                 <div className={`mb-6 p-4 rounded-xl w-fit group-hover:scale-110 transition-transform ${theme === 'dark' ? 'bg-black/50' : 'bg-neutral-100'}`}>
                   {skill.icon}
@@ -283,16 +275,13 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-32 border-t border-[var(--card-border)] transition-colors">
+      <section id="projects" className="py-32 border-t border-(--card-border) transition-colors">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div>
               <h2 className="text-4xl md:text-6xl font-bold mb-4">Selected Works</h2>
               <p className={`${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>A showcase of my recent game and AR/VR projects.</p>
             </div>
-            <a href="https://github.com/pepoperumal" target="_blank" className={`flex items-center gap-2 transition-colors ${theme === 'dark' ? 'text-indigo-400 hover:text-indigo-300' : 'text-indigo-500 hover:text-indigo-600'}`}>
-              View Github <ExternalLink size={16} />
-            </a>
           </div>
 
           <div className="grid gap-12">
@@ -317,7 +306,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className={`group relative grid md:grid-cols-2 gap-8 items-center rounded-3xl p-6 md:p-8 border border-[var(--card-border)] bg-[var(--card-bg)] transition-all ${theme === 'dark' ? 'hover:border-white/10 shadow-none' : 'hover:border-indigo-500/30 hover:shadow-xl'}`}
+                className={`group relative grid md:grid-cols-2 gap-8 items-center rounded-3xl p-6 md:p-8 border border-(--card-border) bg-(--card-bg) transition-all ${theme === 'dark' ? 'hover:border-white/10 shadow-none' : 'hover:border-indigo-500/30 hover:shadow-xl'}` }
               >
                 <div className="relative aspect-video rounded-2xl overflow-hidden shadow-inner">
                   <div className={`absolute inset-0 transition-colors z-10 ${theme === 'dark' ? 'bg-indigo-900/20 group-hover:bg-transparent' : 'bg-indigo-500/10 group-hover:bg-transparent'}`} />
@@ -347,7 +336,7 @@ export default function Home() {
       </section>
 
       {/* Videos Section */}
-      <section id="videos" className="py-32 border-t border-[var(--card-border)] transition-colors">
+      <section id="videos" className="py-32 border-t border-(--card-border) transition-colors">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div>
@@ -378,7 +367,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className={`group relative rounded-3xl overflow-hidden border border-[var(--card-border)] bg-[var(--card-bg)] transition-all ${theme === 'dark' ? 'hover:border-white/10 shadow-none' : 'hover:border-neutral-300 hover:shadow-xl'}`}
+                className={`group relative rounded-3xl overflow-hidden border border-(--card-border) bg-(--card-bg) transition-all ${theme === 'dark' ? 'hover:border-white/10 shadow-none' : 'hover:border-neutral-300 hover:shadow-xl'}` }
               >
                 <div className="relative aspect-video">
                   <iframe
@@ -400,7 +389,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className={`py-32 border-t border-[var(--card-border)] bg-[var(--secondary-bg)] transition-colors`}>
+      <section id="contact" className={`py-32 border-t border-(--card-border) bg-(--secondary-bg) transition-colors`}>
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -410,7 +399,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-bold mb-8">Ready to create something immersive?</h2>
             <p className={`text-lg mb-12 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>
               I am currently open for freelance opportunities and full-time positions.
-              Let's discuss how we can bring your ideas to life.
+              Let&apos;s discuss how we can bring your ideas to life.
             </p>
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-16">
@@ -431,10 +420,7 @@ export default function Home() {
             </div>
 
             <div className="flex justify-center gap-8">
-              <a href="#" className={`transition-colors ${theme === 'dark' ? 'text-neutral-500 hover:text-white' : 'text-neutral-500 hover:text-black'}`}>
-                <Github size={24} />
-              </a>
-              <a href="#" className={`transition-colors ${theme === 'dark' ? 'text-neutral-500 hover:text-white' : 'text-neutral-500 hover:text-blue-600'}`}>
+              <a href="http://linkedin.com/in/perumal-pothan-3730563a2" target="_blank" rel="noopener noreferrer" className={`transition-colors ${theme === 'dark' ? 'text-neutral-500 hover:text-white' : 'text-neutral-500 hover:text-blue-600'}`}>
                 <Linkedin size={24} />
               </a>
             </div>
@@ -443,7 +429,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-[var(--card-border)] text-center text-sm transition-colors text-neutral-500">
+      <footer className="py-8 border-t border-(--card-border) text-center text-sm transition-colors text-neutral-500">
         <p>&copy; {new Date().getFullYear()} Perumal Pothan. All rights reserved.</p>
         <p className="mt-2 text-xs">
           Designed &amp; Developed by{' '}
