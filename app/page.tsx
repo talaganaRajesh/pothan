@@ -68,7 +68,7 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             className="text-xl font-bold tracking-tight"
           >
-            P<span className="text-indigo-500">.</span>
+            P<span className="text-indigo-500">p</span>
           </motion.div>
 
           <div className="hidden md:flex gap-8 items-center">
