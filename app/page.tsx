@@ -445,7 +445,12 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-8 border-t border-[var(--card-border)] text-center text-sm transition-colors text-neutral-500">
         <p>&copy; {new Date().getFullYear()} Perumal Pothan. All rights reserved.</p>
-        <p className="mt-2 text-xs">Designed & Developed with Next.js</p>
+        <p className="mt-2 text-xs">
+          Designed &amp; Developed by{' '}
+          <a href="https://webcros.in" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">
+            Webcros
+          </a>
+        </p>
       </footer>
     </main>
   );
