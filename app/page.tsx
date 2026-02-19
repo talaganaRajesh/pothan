@@ -297,7 +297,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className={`group relative grid md:grid-cols-2 gap-8 items-center rounded-3xl p-6 md:p-8 border border-(--card-border) bg-(--card-bg) transition-all ${theme === 'dark' ? 'hover:border-white/10 shadow-none' : 'hover:border-indigo-500/30 hover:shadow-xl'}` }
+                className={`group relative grid md:grid-cols-2 gap-8 items-center rounded-3xl p-6 md:p-8 border border-(--card-border) bg-(--card-bg) transition-all ${theme === 'dark' ? 'hover:border-white/10 shadow-none' : 'hover:border-indigo-500/30 hover:shadow-xl'}`}
               >
                 <div className="relative aspect-video rounded-2xl overflow-hidden shadow-inner">
                   <div className={`absolute inset-0 transition-colors z-10 ${theme === 'dark' ? 'bg-indigo-900/20 group-hover:bg-transparent' : 'bg-indigo-500/10 group-hover:bg-transparent'}`} />
@@ -342,14 +342,19 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               {
-                title: "Game Development Showcase 2024",
-                desc: "A compilation of my best game mechanics, level designs, and shader experiments from the past year.",
-                url: "dQw4w9WgXcQ"
+                title: "Balloon Buster – Pop Fast. Aim Sharp. React Faster.",
+                desc: "Balloon Buster is a fast-paced 2D arcade game built in Unity where players test their reflexes, timing, and precision by popping dynamically spawning balloons before they escape the screen. As the game progresses, speed increases, spawn patterns become unpredictable, and the pressure intensifies — pushing players to react faster and aim sharper.",
+                url: "Z5Hv6HDkmIQ"
               },
               {
-                title: "AR/VR Interaction Demo",
-                desc: "Demonstrating hand-tracking interactions and spatial UI elements in a mixed reality environment.",
-                url: "LXb3EKWsInQ"
+                title: "Dino Run – A Modern Reimagining of the Endless Classic",
+                desc: "Dino Run is an enhanced and visually upgraded take on the iconic offline browser game inspired by the Chrome Dinosaur Game, Made using Unity. This version modernizes the original endless runner concept with improved graphics, smoother animations, and refined gameplay mechanics while preserving the addictive simplicity that made the classic so memorable.",
+                url: "7-S7VmRBDfo"
+              },
+              {
+                title: "Grid Pulse: A Precision Challenge - Lidar Touch",
+                desc: "Grid Pulse is a fast-paced Unity-based arcade game that tests player speed and cursor accuracy. Set on an 8x16 chessboard grid, the game challenges players to click and clear randomly deployed, pulsing cubes while avoiding two moving hazard lines. Designed for Lidar Touch technology, it transforms any flat surface into a giant touch-sensitive interface.",
+                url: "Z3MJoZSvIPo"
               }
             ].map((video, index) => (
               <motion.div
@@ -358,7 +363,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className={`group relative rounded-3xl overflow-hidden border border-(--card-border) bg-(--card-bg) transition-all ${theme === 'dark' ? 'hover:border-white/10 shadow-none' : 'hover:border-neutral-300 hover:shadow-xl'}` }
+                className={`group relative rounded-3xl overflow-hidden border border-(--card-border) bg-(--card-bg) transition-all ${theme === 'dark' ? 'hover:border-white/10 shadow-none' : 'hover:border-neutral-300 hover:shadow-xl'}`}
               >
                 <div className="relative aspect-video">
                   <iframe
