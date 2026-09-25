@@ -381,6 +381,43 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+
+          <div className="mt-16">
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <h3 className="text-2xl md:text-3xl font-bold">Shared Links</h3>
+              <span className={`text-sm ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>
+                Recent YouTube links
+              </span>
+            </div>
+
+            <div className="grid gap-4">
+              {[
+                'https://youtu.be/itELIQZV1BA?feature=shared',
+                'https://youtu.be/t3yJcCPe1kE?si=dzfUPehWf0W4AXb2',
+                'https://youtu.be/N3P2UJDBPOE?feature=shared',
+                'https://youtu.be/eXJIhtywolk?si=OWaUAXXDYpOhrr0V',
+                'https://youtu.be/shorts/KkLMxWTxVpPc?si=kuGQSP_c_077Jus3'
+              ].map((link, index) => (
+                <a
+                  key={index}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group flex items-center gap-4 rounded-2xl border p-4 transition-all ${theme === 'dark' ? 'border-white/10 bg-white/5 hover:bg-white/10 text-white' : 'border-neutral-200 bg-white hover:bg-neutral-50 text-neutral-900'}`}
+                >
+                  <div className={`flex h-10 w-10 items-center justify-center rounded-full ${theme === 'dark' ? 'bg-red-500/15 text-red-400' : 'bg-red-100 text-red-600'}`}>
+                    <ExternalLink size={16} />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium uppercase tracking-wide opacity-70">YouTube Link {index + 1}</p>
+                    <p className="truncate text-sm md:text-base break-all text-indigo-500 group-hover:text-indigo-400">
+                      {link}
+                    </p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
